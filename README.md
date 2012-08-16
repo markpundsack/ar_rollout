@@ -12,7 +12,7 @@ This project rocks and uses MIT-LICENSE.
 To use this gem, add on your gemfile
 
 ```ruby
-gem 'ar_rollout', git: 'git@github.com:doochoo-inc/ar_rollout.git'
+gem 'ar_rollout', git: 'git@github.com:markpundsack/ar_rollout.git'
 ```
 
 and run the generator:
@@ -49,6 +49,10 @@ ArRollout.configure do |configure|
   # # For example, if you have a admin? method for your User class
   # # you can define an :admin group:
 
+  configure.define_group(:all) do |user|
+    true
+  end
+
   # configure.define_group :admin do |user|
   #   user.admin?
   # end
@@ -73,6 +77,12 @@ you can do:
 ArRollout.activate_group :my_new_amazing_feature, :tester
 ```
 
+Or via rake with:
+
+```
+rake rollout:activate_group[my_new_amazing_feature,all]
+```
+
 So, in your controller/view you can use the helper method `rollout? :my_new_amazing_feature`, which will test if the
 `current_user` is enabled to that feature.
 
@@ -80,7 +90,12 @@ So, in your controller/view you can use the helper method `rollout? :my_new_amaz
 
 ## ToDo
 
-- Activate a feature for all users
+- Add percentage support
+- Optimize user lookup
+- Optimize database structure
+
+## Version 0.0.1 - 16 Aug 2012
+- Add :all to default initializer
 
 ## Version 0.0.1 - 13 Jan 2012
 - Generator which create both migration and initializer
