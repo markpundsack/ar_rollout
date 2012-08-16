@@ -15,4 +15,8 @@ namespace :rollout do
 	task :deactivate_group, [:feature, :user_id] => :environment do |t, args|
 		ArRollout.deactivate_group(args.feature,args.user_id)
 	end
+	desc "Deactivate a feature"
+	task :deactivate_all, [:feature] => :environment do |t, args|
+		ArRollout.deactivate_all(args.feature)
+	end
 end

@@ -74,7 +74,8 @@ If you want to add a feature to a group you define in `config/initializer/ar_rol
 you can do:
 
 ```ruby
-ArRollout.activate_group :my_new_amazing_feature, :tester
+ArRollout.activate_group  :my_new_amazing_feature, :tester
+ArRollout.activate_user   :my_new_amazing_feature, current_user
 ```
 
 Or via rake with:
@@ -93,8 +94,14 @@ So, in your controller/view you can use the helper method `rollout? :my_new_amaz
 - Add percentage support
 - Optimize user lookup
 - Optimize database structure
+- Add #info
+- Merge ArRollout and Rollout class methods
+- Add feature list
 
-## Version 0.0.1 - 16 Aug 2012
+## Version 0.0.3 - 16 Aug 2012
+- Add deactivate_all method and rake task
+
+## Version 0.0.2 - 16 Aug 2012
 - Add :all to default initializer
 
 ## Version 0.0.1 - 13 Jan 2012

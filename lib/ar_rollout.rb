@@ -19,9 +19,7 @@ module ArRollout
 
   def self.deactivate_user(feature = nil, user = nil)
     res_id = [Fixnum, String].include?(user.class) ? user : user.id
-    Rollout.find_all_by_name_and_user_id(feature, res_id).any? do |r|
-       r.destroy
-    end
+    Rollout.find_all_by_name_and_user_id(feature, res_id).map(&:destroy)
   end
 
   def self.activate_group(feature = nil, group = nil)
@@ -30,10 +28,13 @@ module ArRollout
   end
 
   def self.deactivate_group(feature = nil, group = nil)
-    Rollout.find_all_by_name_and_group(feature, group).any? do |r|
-       r.destroy
-    end
+    Rollout.find_all_by_name_and_group(feature, group).map(&:destroy)
   end
+
+  def self.deactivate_all(feature)
+    Rollout.find_all_by_name(feature).map(&:destroy)
+  end
+
 end
 
 ActionController::Base.send :include, ArRollout::Controller::Helpers
