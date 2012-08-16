@@ -18,7 +18,7 @@ class Rollout < ActiveRecord::Base
 
   def match_user?(user = nil)
     return false if user.nil?
-    user_id ? user_id == user.id : true
+    user_id ? user_id == user.id : false
   end
 
 end

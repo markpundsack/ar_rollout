@@ -99,10 +99,10 @@ So, in your controller/view you can use the helper method `rollout? :my_new_amaz
 - Add feature list
 
 ## Version 0.0.3 - 16 Aug 2012
-- Add deactivate_all method and rake task
+- Add `deactivate_all` method and rake task
 
 ## Version 0.0.2 - 16 Aug 2012
-- Add :all to default initializer
+- Add `:all` to default initializer
 
 ## Version 0.0.1 - 13 Jan 2012
 - Generator which create both migration and initializer
