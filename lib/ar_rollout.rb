@@ -36,7 +36,7 @@ module ArRollout
   end
 
   def self.features
-    Rollout.select("distinct(name) sort by name").map(&:name)
+    Rollout.select("distinct(name)").order(:name).map(&:name)
   end
 
   def self.active?(name, user)
