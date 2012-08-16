@@ -35,6 +35,16 @@ module ArRollout
     Rollout.find_all_by_name(feature).map(&:destroy)
   end
 
+  def self.features
+    Rollout.select("distinct(name) sort by name").map(&:name)
+  end
+
+  def self.active?(name, user)
+    Rollout.where(name: name).any? do |rollout|
+      rollout.match?(user)
+    end
+  end
+
 end
 
 ActionController::Base.send :include, ArRollout::Controller::Helpers

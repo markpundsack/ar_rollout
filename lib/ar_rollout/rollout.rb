@@ -1,7 +1,6 @@
-class Rollout < ActiveRecord::Base
+class ArRollout < ActiveRecord::Base
   def match?(user)
-    # enabled? && match_group?(user) && match_user?(user)
-    match_user?(user) || match_group?(user)
+    enabled? && (match_user?(user) || match_group?(user) || match_percentage?(user))
   end
 
   def enabled?
@@ -17,8 +16,11 @@ class Rollout < ActiveRecord::Base
   end
 
   def match_user?(user = nil)
-    return false if user.nil?
     user_id ? user_id == user.id : false
+  end
+
+  def match_percentage?(user)
+    percentage ? user.id % 100 < percentage : false
   end
 
 end

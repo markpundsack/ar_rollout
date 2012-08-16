@@ -88,16 +88,23 @@ rake rollout:activate_group[my_new_amazing_feature,all]
 So, in your controller/view you can use the helper method `rollout? :my_new_amazing_feature`, which will test if the
 `current_user` is enabled to that feature.
 
+List known features with:
+
+`ArRollout.features`
+
 ## Versions and ToDo
 
 ## ToDo
 
-- Add percentage support
 - Optimize user lookup
 - Optimize database structure
 - Add #info
 - Merge ArRollout and Rollout class methods
-- Add feature list
+- Autodetection of new features from code, before rollout begins
+
+## Version 0.0.4 - 16 Aug 2012
+- Add percentage support
+- Add feature list with `ArRollout.features`
 
 ## Version 0.0.3 - 16 Aug 2012
 - Add `deactivate_all` method and rake task
