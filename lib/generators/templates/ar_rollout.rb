@@ -1,4 +1,9 @@
 ArRollout.configure do |configure|
+
+  configure.define_group(:all) do |user|
+    true
+  end
+
   # # Here you can define the logic for your own groups
   # # For example, if you have a admin? method for your User class
   # # you can define an :admin group:
