@@ -3,6 +3,7 @@
 ArRollout is the ActiveRecord version of (Rollout)[https://github.com/jamesgolick/rollout], written
 after the wonderful Railscast (315-rollout-and-degrade)[http://railscasts.com/episodes/315-rollout-and-degrade]
 by Ryan Bates (thank you).
+Originally released as https://github.com/doochoo-inc/ar_rollout but now maintained at https://github.com/markpundsack/ar_rollout.
 
 
 This project rocks and uses MIT-LICENSE.
@@ -12,7 +13,7 @@ This project rocks and uses MIT-LICENSE.
 To use this gem, add on your gemfile
 
 ```ruby
-gem 'ar_rollout', git: 'git@github.com:markpundsack/ar_rollout.git'
+gem 'ar_rollout'
 ```
 
 and run the generator:

@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.name        = "ar_rollout"
   s.version     = ArRollout::VERSION
   s.authors     = ["Enrico Carlesso", "Mattia Gheda", "Mark Pundsack"]
-  s.email       = ["dev@doochoo.com"]
-  s.homepage    = "https://github.com/doochoo-inc/ar_rollout"
+  s.email       = ["mp@heroku.com"]
+  s.homepage    = "https://github.com/markpundsack/ar_rollout"
   s.summary     = "An ActiveRecord version of Rollout gem (https://github.com/jamesgolick/rollout)."
   s.description = ""
 
