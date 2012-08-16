@@ -1,4 +1,4 @@
-class ArRollout < ActiveRecord::Base
+class Rollout < ActiveRecord::Base
   def match?(user)
     enabled? && (match_user?(user) || match_group?(user) || match_percentage?(user))
   end
