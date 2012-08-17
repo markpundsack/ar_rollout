@@ -51,8 +51,30 @@ module ArRollout
     Rollout.where(name: name).each do |rollout|
       rollout.increment!(:failure_count)
     end
-  raise e
-end
+    raise e
+  end
+
+  def self.info(feature)
+    {
+      :percentage => (active_percentage(feature) || 0).to_i,
+      :groups => active_groups(feature).map { |g| g.to_sym },
+      :users => active_user_ids(feature)
+    }
+  end
+
+private
+   def self.active_groups(feature)
+    Rollout.where('"name" = ? and "group" is not null', feature).map(&:group)
+  end
+
+  def self.active_user_ids(feature)
+    Rollout.where('"name" = ? and "user_id" is not null', feature).map(&:user_id)
+  end
+
+  def self.active_percentage(feature)
+    Rollout.where('"name" = ? and "percentage" is not null', feature).map(&:percentage).first
+  end
+
 
 end
 

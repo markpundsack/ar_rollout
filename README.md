@@ -115,16 +115,18 @@ List known features with:
 
 - Optimize user lookup
 - Optimize database structure
-- Add #info
 - Merge ArRollout and Rollout class methods
 - Autodetection of new features from code, before rollout begins
+
+## Version 0.0.7 - 16 Aug 2012
+- Add `ArRollout.info`
 
 ## Version 0.0.4 - 16 Aug 2012
 - Add percentage support
 - Add feature list with `ArRollout.features`
 
 ## Version 0.0.3 - 16 Aug 2012
-- Add `deactivate_all` method and rake task
+- Add `ArRollout.deactivate_all` method and rake task
 
 ## Version 0.0.2 - 16 Aug 2012
 - Add `:all` to default initializer
