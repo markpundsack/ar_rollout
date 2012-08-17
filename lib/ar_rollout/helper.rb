@@ -3,13 +3,15 @@ module ArRollout
     module Helpers
       def self.included(base)
         base.send :helper_method, :rollout?
+        base.send :helper_method, :degrade_feature?
       end
 
-      # in vista rollout? :radio_feature
       def rollout?(name)
-        Rollout.where(name: name).any? do |rollout|
-          rollout.match?(current_user)
-        end
+        ArRollout.active?(name, current_user)
+      end
+
+      def degrade_feature?(name)
+        ArRollout.degrade_feature?(name)
       end
     end
   end

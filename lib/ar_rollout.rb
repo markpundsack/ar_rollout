@@ -45,6 +45,15 @@ module ArRollout
     end
   end
 
+  def self.degrade_feature(name)
+    yield
+  rescue StandardError => e
+    Rollout.where(name: name).each do |rollout|
+      rollout.increment!(:failure_count)
+    end
+  raise e
+end
+
 end
 
 ActionController::Base.send :include, ArRollout::Controller::Helpers
