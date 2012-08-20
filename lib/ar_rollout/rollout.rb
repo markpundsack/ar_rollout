@@ -16,7 +16,7 @@ class Rollout < ActiveRecord::Base
   end
 
   def match_user?(user = nil)
-    user_id ? user_id == user.id : false
+    user_id ? user_id.to_s == user.id.to_s : false
   end
 
   def match_percentage?(user)
