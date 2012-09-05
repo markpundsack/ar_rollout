@@ -11,24 +11,29 @@ module ArRollout
     end
   end
 
-  def self.activate_user(feature = nil, user = nil)
+  def self.activate_user(feature, user)
     return false if feature.nil? || user.nil?
     res_id = [Fixnum, String].include?(user.class) ? user : user.id
     Rollout.find_or_create_by_name_and_user_id(feature, res_id)
   end
 
-  def self.deactivate_user(feature = nil, user = nil)
+  def self.deactivate_user(feature, user)
     res_id = [Fixnum, String].include?(user.class) ? user : user.id
     Rollout.find_all_by_name_and_user_id(feature, res_id).map(&:destroy)
   end
 
-  def self.activate_group(feature = nil, group = nil)
+  def self.activate_group(feature, group)
     return false if feature.nil? || group.nil?
     Rollout.find_or_create_by_name_and_group(feature, group)
   end
 
-  def self.deactivate_group(feature = nil, group = nil)
+  def self.deactivate_group(feature, group)
     Rollout.find_all_by_name_and_group(feature, group).map(&:destroy)
+  end
+
+  def self.activate_percentage(feature, percentage)
+    Rollout.where("name = ? and percentage is not null", feature).destroy_all
+    Rollout.create(name: feature, percentage: percentage)
   end
 
   def self.deactivate_all(feature)
@@ -72,9 +77,8 @@ private
   end
 
   def self.active_percentage(feature)
-    Rollout.where('"name" = ? and "percentage" is not null', feature).map(&:percentage).first
+    Rollout.select("percentage").where('"name" = ? and "percentage" is not null', feature).first
   end
-
 
 end
 
