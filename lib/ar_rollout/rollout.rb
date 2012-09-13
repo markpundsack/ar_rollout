@@ -2,6 +2,7 @@ class Rollout < ActiveRecord::Base
   attr_accessible :name, :group, :user_id, :percentage
 
   def match?(user)
+    return false unless user
     enabled? && (match_user?(user) || match_group?(user) || match_percentage?(user))
   end
 
