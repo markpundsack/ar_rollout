@@ -7,6 +7,7 @@ module ArRollout
       end
 
       def rollout?(name)
+        return false unless current_user
         ArRollout.active?(name, current_user)
       end
 

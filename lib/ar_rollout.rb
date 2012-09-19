@@ -45,6 +45,7 @@ module ArRollout
   end
 
   def self.active?(name, user)
+    return false unless user
     Rollout.where(name: name).where("user_id = ? or user_id is NULL", user.id.to_i).any? do |rollout|
       rollout.match?(user)
     end
