@@ -51,6 +51,15 @@ module ArRollout
     end
   end
 
+  def self.all_active(user)
+    return false unless user
+    rollouts = []
+    Rollout.where("user_id = ? or user_id is NULL", user.id.to_i).any? do |rollout|
+      rollouts << rollout.name if rollout.match?(user)
+    end
+    rollouts
+  end
+
   def self.degrade_feature(name)
     yield
   rescue StandardError => e
