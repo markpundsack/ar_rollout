@@ -54,10 +54,10 @@ module ArRollout
   def self.all_active(user)
     return false unless user
     rollouts = []
-    Rollout.where("user_id = ? or user_id is NULL", user.id.to_i).any? do |rollout|
+    Rollout.where("user_id = ? or user_id is NULL", user.id.to_i).each do |rollout|
       rollouts << rollout.name if rollout.match?(user)
     end
-    rollouts
+    rollouts.uniq
   end
 
   def self.degrade_feature(name)
