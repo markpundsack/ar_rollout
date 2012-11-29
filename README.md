@@ -118,6 +118,9 @@ List known features with:
 - Merge ArRollout and Rollout class methods
 - Autodetection of new features from code, before rollout begins
 
+## Version 0.0.14 - 28 Nov 2012
+- Add rake task 'rollout:list'
+
 ## Version 0.0.7 - 16 Aug 2012
 - Add `ArRollout.info`
 

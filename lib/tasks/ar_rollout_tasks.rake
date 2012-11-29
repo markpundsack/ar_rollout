@@ -23,4 +23,8 @@ namespace :rollout do
 	task :deactivate_all, [:feature] => :environment do |t, args|
 		ArRollout.deactivate_all(args.feature)
 	end
+  desc "List all features"
+  task :list, [] => :environment do |t, args|
+    puts ArRollout.features
+  end
 end
