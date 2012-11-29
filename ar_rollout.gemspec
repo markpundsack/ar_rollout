@@ -7,7 +7,7 @@ require "ar_rollout/version"
 Gem::Specification.new do |s|
   s.name        = "ar_rollout"
   s.version     = ArRollout::VERSION
-  s.authors     = ["Enrico Carlesso", "Mattia Gheda", "Mark Pundsack"]
+  s.authors     = ["Enrico Carlesso", "Mattia Gheda", "Mark Pundsack", "Jonathan Clem", "Dominic Dagradi"]
   s.email       = ["mp@heroku.com"]
   s.homepage    = "https://github.com/markpundsack/ar_rollout"
   s.summary     = "An ActiveRecord version of Rollout gem (https://github.com/jamesgolick/rollout)."
@@ -19,5 +19,6 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~>3.0"
 
   s.add_development_dependency "sqlite3"
+  s.add_development_dependency "rspec"
   s.add_development_dependency "bcrypt-ruby"
 end
