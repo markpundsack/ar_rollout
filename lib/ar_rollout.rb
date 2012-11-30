@@ -1,11 +1,19 @@
 require 'ar_rollout/rollout.rb'
 require 'ar_rollout/helper.rb'
 module ArRollout
+  @@groups = []
+
   def self.configure
     yield self
   end
 
+  def self.groups
+    @@groups
+  end
+
   def self.define_group(name, &block)
+    @@groups << name
+
     Rollout.send :define_method, "match_#{name}?" do |b|
       block.call(b)
     end
