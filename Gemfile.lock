@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ar_rollout (0.0.16)
+    ar_rollout (0.0.17)
       rails (~> 3.0)
 
 GEM
