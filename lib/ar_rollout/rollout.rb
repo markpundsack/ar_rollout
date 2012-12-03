@@ -13,6 +13,8 @@ class Rollout < ActiveRecord::Base
   def match_group?(user)
     if Rollout.method_defined? "match_#{group}?"
       send "match_#{group}?", user
+    elsif Group.find_by_name(group).users.collect(&:id).include?(user.id)
+      true
     else
       false
     end

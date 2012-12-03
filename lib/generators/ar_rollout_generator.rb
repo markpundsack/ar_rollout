@@ -11,8 +11,8 @@ class ArRolloutGenerator < Rails::Generators::Base
   def copy_initializer_file
     copy_file "ar_rollout.rb", "config/initializers/ar_rollout.rb"
     migration_template "migration.rb", "db/migrate/create_rollout"
+    migration_template "groups_migration.rb", "db/migrate/create_groups_and_groups_users"
   end
-
 end
 
 
