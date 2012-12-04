@@ -93,7 +93,9 @@ module ArRollout
     return false unless user
     rollouts = []
     Rollout.where("user_id = ? or user_id is NULL", user.id.to_i).each do |rollout|
-      rollouts << rollout.name if rollout.match?(user)
+      unless OptOut.where(feature: name, user_id: user.id).any?
+        rollouts << rollout.name if rollout.match?(user)
+      end
     end
     rollouts.uniq
   end
