@@ -1,5 +1,6 @@
 require 'ar_rollout/rollout.rb'
 require 'ar_rollout/group.rb'
+require 'ar_rollout/membership.rb'
 require 'ar_rollout/helper.rb'
 module ArRollout
   @@groups = []
