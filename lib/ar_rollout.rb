@@ -1,6 +1,7 @@
 require 'ar_rollout/rollout.rb'
 require 'ar_rollout/group.rb'
 require 'ar_rollout/membership.rb'
+require 'ar_rollout/opt_out.rb'
 require 'ar_rollout/helper.rb'
 module ArRollout
   @@defined_groups = []
@@ -34,6 +35,11 @@ module ArRollout
   def self.deactivate_user(feature, user)
     res_id = [Fixnum, String].include?(user.class) ? user : user.id
     Rollout.find_all_by_name_and_user_id(feature, res_id).map(&:destroy)
+  end
+
+  def self.exclude_user(feature, user)
+    res_id = [Fixnum, String].include?(user.class) ? user : user.id
+    OptOut.create(feature: feature, user_id: res_id)
   end
 
   def self.activate_group(feature, group)
@@ -76,8 +82,10 @@ module ArRollout
 
   def self.active?(name, user)
     return false unless user
-    Rollout.where(name: name).where("user_id = ? or user_id is NULL", user.id.to_i).any? do |rollout|
-      rollout.match?(user)
+    unless OptOut.where(feature: name, user_id: user.id).any?
+      Rollout.where(name: name).where("user_id = ? or user_id is NULL", user.id.to_i).any? do |rollout|
+        rollout.match?(user)
+      end
     end
   end
 

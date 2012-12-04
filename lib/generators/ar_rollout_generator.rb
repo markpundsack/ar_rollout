@@ -12,6 +12,7 @@ class ArRolloutGenerator < Rails::Generators::Base
     copy_file "ar_rollout.rb", "config/initializers/ar_rollout.rb"
     migration_template "migration.rb", "db/migrate/create_rollout"
     migration_template "groups_migration.rb", "db/migrate/create_groups_and_groups_users"
+    migration_template "opt_outs_migration.rb", "db/migrate/create_opt_outs"
   end
 end
 
