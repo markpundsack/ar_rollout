@@ -118,7 +118,7 @@ List known features with:
 - Merge ArRollout and Rollout class methods
 - Autodetection of new features from code, before rollout begins
 
-## Version 0.0.18 - 04 Dec 2012
+## Version 0.0.20 - 04 Dec 2012
 - Add Group, Membership, OptOut
 
 ## Version 0.0.17 - 29 Nov 2012
