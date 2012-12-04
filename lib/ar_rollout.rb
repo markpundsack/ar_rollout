@@ -14,7 +14,7 @@ module ArRollout
   end
 
   def self.groups
-    (@@defined_groups + Group.select(:name).collect(&:name).collect(&:intern)).uniq
+    (@@defined_groups + Group.select(:name).collect(&:name).collect(&:intern)).uniq.sort
   end
 
   def self.define_group(name, &block)
