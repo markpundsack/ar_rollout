@@ -38,6 +38,9 @@ module ArRollout
 
   def self.activate_group(feature, group)
     return false if feature.nil? || group.nil?
+    unless defined_groups.include? group
+      get_group(group)
+    end
     Rollout.find_or_create_by_name_and_group(feature, group)
   end
 
@@ -50,12 +53,25 @@ module ArRollout
     Rollout.create(name: feature, percentage: percentage)
   end
 
+  def self.get_group(group)
+    Group.find_or_create_by_name(group)
+  end
+
+  def self.activate_user_in_group(group, user)
+    res_id = [Fixnum, String].include?(user.class) ? user : user.id
+    Membership.find_or_create_by_group_id_and_user_id(get_group(group).id, res_id)
+  end
+
   def self.deactivate_all(feature)
     Rollout.find_all_by_name(feature).map(&:destroy)
   end
 
   def self.features
     Rollout.select("distinct(name)").order(:name).map(&:name)
+  end
+
+  def self.active_groups
+    Rollout.where("'group' is NOT NULL").map(&:group).uniq
   end
 
   def self.active?(name, user)
@@ -85,22 +101,22 @@ module ArRollout
 
   def self.info(feature)
     {
-      :percentage => (active_percentage(feature) || 0).to_i,
-      :groups => active_groups(feature).map { |g| g.to_sym },
-      :users => active_user_ids(feature)
+      :percentage => (_active_percentage(feature) || 0).to_i,
+      :groups => _active_groups(feature).map { |g| g.to_sym },
+      :users => _active_user_ids(feature)
     }
   end
 
 private
-   def self.active_groups(feature)
+   def self._active_groups(feature)
     Rollout.where('"name" = ? and "group" is not null', feature).map(&:group)
   end
 
-  def self.active_user_ids(feature)
+  def self._active_user_ids(feature)
     Rollout.where('"name" = ? and "user_id" is not null', feature).map(&:user_id)
   end
 
-  def self.active_percentage(feature)
+  def self._active_percentage(feature)
     Rollout.select("percentage").where('"name" = ? and "percentage" is not null', feature).first
   end
 
