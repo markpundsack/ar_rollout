@@ -3,18 +3,22 @@ require 'ar_rollout/group.rb'
 require 'ar_rollout/membership.rb'
 require 'ar_rollout/helper.rb'
 module ArRollout
-  @@groups = []
+  @@defined_groups = []
 
   def self.configure
     yield self
   end
 
+  def self.defined_groups
+    @@defined_groups
+  end
+
   def self.groups
-    (@@groups + Group.select(:name).collect(&:name).collect(&:intern)).uniq
+    (@@defined_groups + Group.select(:name).collect(&:name).collect(&:intern)).uniq
   end
 
   def self.define_group(name, &block)
-    @@groups << name
+    @@defined_groups << name
 
     Rollout.send :define_method, "match_#{name}?" do |b|
       block.call(b)
