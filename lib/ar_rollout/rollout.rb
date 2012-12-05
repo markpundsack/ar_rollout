@@ -1,5 +1,7 @@
 class Rollout < ActiveRecord::Base
   attr_accessible :name, :group, :user_id, :percentage
+  validates :name, presence: true
+  validate :validate_one_rollout
 
   def match?(user)
     return false unless user
@@ -28,4 +30,11 @@ class Rollout < ActiveRecord::Base
     percentage ? ((user.id.to_i % 100) < percentage.to_i) : false
   end
 
+  private
+
+  def validate_one_rollout
+    unless group || user_id || percentage
+      errors.add(:base, 'Must have group, user_id, or percentage')
+    end
+  end
 end
