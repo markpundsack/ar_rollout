@@ -15,10 +15,13 @@ class Rollout < ActiveRecord::Base
   def match_group?(user)
     if Rollout.method_defined? "match_#{group}?"
       send "match_#{group}?", user
-    elsif group = Group.find_by_name(group) && group.memberships.where('user_id = ?', user.id).any?
-      true
     else
-      false
+      data_group = Group.find_by_name(group)
+      if data_group && data_group.memberships.where('user_id = ?', user.id).any?
+        true
+      else
+        false
+      end
     end
   end
 
