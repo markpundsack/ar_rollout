@@ -5,9 +5,9 @@ class Rollout < ActiveRecord::Base
 
   def self.matching(user)
     where('"rollouts".user_id = ? OR "rollouts".user_id IS NULL', user.id).
-      where('"rollouts".name NOT IN (SELECT feature FROM "opt_outs" WHERE "opt_outs".user_id = ?)', user.id).uniq_by(&:name).select do |rollout|
+      where('"rollouts".name NOT IN (SELECT feature FROM "opt_outs" WHERE "opt_outs".user_id = ?)', user.id).select { |rollout|
         rollout.match? user
-      end
+      }.uniq_by(&:name)
   end
 
   def match?(user)
