@@ -3,6 +3,13 @@ class Rollout < ActiveRecord::Base
   validates :name, presence: true
   validate :validate_one_rollout
 
+  def self.matching(user)
+    where('"rollouts".user_id = ? OR "rollouts".user_id IS NULL', user.id).
+      where('"rollouts".name NOT IN (SELECT feature FROM "opt_outs" WHERE "opt_outs".user_id = ?)', user.id).uniq_by(&:name).select do |rollout|
+        rollout.match? user
+      end
+  end
+
   def match?(user)
     return false unless user
     enabled? && (match_user?(user) || match_group?(user) || match_percentage?(user))

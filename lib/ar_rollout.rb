@@ -124,13 +124,7 @@ module ArRollout
 
   def self.all_active(user)
     return false unless user
-    rollouts = []
-    Rollout.where("user_id = ? or user_id is NULL", user.id).each do |rollout|
-      unless OptOut.where(feature: rollout.name, user_id: user.id).any?
-        rollouts << rollout.name if rollout.match?(user)
-      end
-    end
-    rollouts.uniq.sort
+    Rollout.matching(user).collect(&:name).sort
   end
 
   private
