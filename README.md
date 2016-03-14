@@ -1,7 +1,7 @@
 # ArRollout
 
-ArRollout is the ActiveRecord version of (Rollout)[https://github.com/jamesgolick/rollout], written
-after the wonderful Railscast (315-rollout-and-degrade)[http://railscasts.com/episodes/315-rollout-and-degrade]
+ArRollout is the ActiveRecord version of [Rollout](https://github.com/jamesgolick/rollout), written
+after the wonderful Railscast [315-rollout-and-degrade](http://railscasts.com/episodes/315-rollout-and-degrade)
 by Ryan Bates (thank you).
 Originally released as https://github.com/doochoo-inc/ar_rollout but now maintained at https://github.com/markpundsack/ar_rollout.
 
